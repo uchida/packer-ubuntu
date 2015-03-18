@@ -1,0 +1,112 @@
+{
+  "builders": [
+    {
+      "vm_name": "ubuntu-14.04",
+      "iso_url": "http://archive.ubuntu.com/ubuntu/dists/trusty/main/installer-amd64/current/images/netboot/mini.iso",
+      "iso_checksum": "bc09966b54f91f62c3c41fc14b76f2baa4cce48595ce22e8c9f24ab21ac8d965",
+      "iso_checksum_type": "sha256",
+      "boot_command": [
+        "<esc><wait>",
+        "/linux initrd=/initrd.gz auto=true noapic=true fb=false ",
+        "hostname=localhost locale=en_US keyboard-configuration/modelcode=SKIP ",
+        "preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg<enter><wait>"
+      ],
+      "boot_wait": "5s",
+      "disk_size": 40960,
+      "http_directory": "http",
+      "ssh_username": "root",
+      "ssh_password": "packer",
+      "ssh_port": 22,
+      "ssh_wait_timeout": "1000s",
+      "shutdown_command": "shutdown -P now",
+      "headless": true,
+
+      "type": "virtualbox-iso",
+      "guest_os_type": "Ubuntu_64"
+    },
+    {
+      "vm_name": "ubuntu-14.04",
+      "iso_url": "http://archive.ubuntu.com/ubuntu/dists/trusty/main/installer-amd64/current/images/netboot/mini.iso",
+      "iso_checksum": "bc09966b54f91f62c3c41fc14b76f2baa4cce48595ce22e8c9f24ab21ac8d965",
+      "iso_checksum_type": "sha256",
+      "boot_command": [
+        "<esc><wait>",
+        "/linux initrd=/initrd.gz auto=true noapic=true fb=false ",
+        "hostname=localhost locale=en_US keyboard-configuration/modelcode=SKIP ",
+        "preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg<enter><wait>"
+      ],
+      "boot_wait": "5s",
+      "disk_size": 40960,
+      "http_directory": "http",
+      "ssh_username": "root",
+      "ssh_password": "packer",
+      "ssh_port": 22,
+      "ssh_wait_timeout": "1000s",
+      "shutdown_command": "shutdown -P now",
+      "headless": true,
+
+      "type": "vmware-iso",
+      "guest_os_type": "ubuntu-64",
+      "tools_upload_flavor": "linux"
+    },
+    {
+      "vm_name": "ubuntu-14.04",
+      "iso_url": "http://archive.ubuntu.com/ubuntu/dists/trusty/main/installer-amd64/current/images/netboot/mini.iso",
+      "iso_checksum": "bc09966b54f91f62c3c41fc14b76f2baa4cce48595ce22e8c9f24ab21ac8d965",
+      "iso_checksum_type": "sha256",
+      "boot_command": [
+        "<esc><wait>",
+        "/linux initrd=/initrd.gz auto=true noapic=true fb=false ",
+        "hostname=localhost locale=en_US keyboard-configuration/modelcode=SKIP ",
+        "preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg<enter><wait>"
+      ],
+      "boot_wait": "5s",
+      "disk_size": 40960,
+      "http_directory": "http",
+      "ssh_username": "root",
+      "ssh_password": "packer",
+      "ssh_port": 22,
+      "ssh_wait_timeout": "1000s",
+      "shutdown_command": "shutdown -P now",
+      "headless": true,
+
+      "type": "qemu",
+      "accelerator": "kvm",
+      "format": "qcow2",
+      "qemu_binary": "/usr/libexec/qemu-kvm"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "scripts": [
+        "scripts/base.sh",
+        "scripts/vagrant.sh"
+      ]
+    },
+    {
+      "type": "shell",
+      "script": "scripts/virtualbox.sh",
+      "only": ["virtualbox-iso"]
+    },
+    {
+      "type": "shell",
+      "script": "scripts/vmware.sh",
+      "only": ["vmware-iso"]
+    },
+    {
+      "type": "shell",
+      "scripts": [
+        "scripts/cleanup.sh",
+        "scripts/zerodisk.sh"
+      ]
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "vagrant",
+      "output": "ubuntu-14.04-x64-{{ .Provider }}.box",
+      "keep_input_artifact": false
+    }
+  ]
+}
