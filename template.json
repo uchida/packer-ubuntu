@@ -86,13 +86,8 @@
     },
     {
       "type": "shell",
-      "script": "scripts/virtualbox.sh",
-      "only": ["virtualbox-iso"]
-    },
-    {
-      "type": "shell",
-      "script": "scripts/vmware.sh",
-      "only": ["vmware-iso"]
+      "script": "scripts/vmguest.sh",
+      "only": ["virtualbox-iso", "vmware-iso"]
     },
     {
       "type": "shell",
