@@ -46,8 +46,7 @@
       "headless": true,
 
       "type": "vmware-iso",
-      "guest_os_type": "ubuntu-64",
-      "tools_upload_flavor": "linux"
+      "guest_os_type": "ubuntu-64"
     },
     {
       "vm_name": "ubuntu-14.04",
