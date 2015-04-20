@@ -69,10 +69,7 @@
       "shutdown_command": "shutdown -P now",
       "headless": true,
 
-      "type": "qemu",
-      "accelerator": "kvm",
-      "format": "qcow2",
-      "qemu_binary": "/usr/libexec/qemu-kvm"
+      "type": "qemu"
     }
   ],
   "provisioners": [

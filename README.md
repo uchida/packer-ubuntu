@@ -20,4 +20,3 @@ $ packer build -only=vmware-iso template.json
 $ packer build -only=qemu template.json
 ```
 
-When building qemu images, note that your `qemu_binary` path is correct.
