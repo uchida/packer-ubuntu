@@ -20,3 +20,8 @@ $ packer build -only=vmware-iso template.json
 $ packer build -only=qemu template.json
 ```
 
+## License
+
+[![CC0](http://i.creativecommons.org/p/zero/1.0/88x31.png "CC0")]
+(http://creativecommons.org/publicdomain/zero/1.0/deed)
+
