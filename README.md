@@ -1,6 +1,7 @@
 # packer-ubuntu
 
 [![Build Status](https://img.shields.io/travis/uchida/packer-ubuntu.svg)](https://travis-ci.org/uchida/packer-ubuntu)
+[![License](https://img.shields.io/github/license/uchida/packer-ubuntu.svg)](http://creativecommons.org/publicdomain/zero/1.0/deed)
 
 packer template to build Ubuntu Server images
 
@@ -26,4 +27,6 @@ $ packer build -only=qemu template.json
 
 [![CC0](http://i.creativecommons.org/p/zero/1.0/88x31.png "CC0")]
 (http://creativecommons.org/publicdomain/zero/1.0/deed)
+
+dedicated to public domain by [contributors](https://github.com/uchida/packer-ubuntu/graphs/contributors).
 
