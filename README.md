@@ -1,5 +1,7 @@
 # packer-ubuntu
 
+[![Build Status](https://img.shields.io/travis/uchida/packer-ubuntu.svg)](https://travis-ci.org/uchida/packer-ubuntu)
+
 packer template to build Ubuntu Server images
 
 ## Building Images
