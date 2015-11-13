@@ -1,8 +1,13 @@
 {
   "variables": {
-      "vm_name": "ubuntu-14.04",
-      "iso_url": "http://ftp.riken.jp/Linux/ubuntu/dists/trusty/main/installer-amd64/current/images/netboot/mini.iso",
-      "iso_checksum": "bc09966b54f91f62c3c41fc14b76f2baa4cce48595ce22e8c9f24ab21ac8d965",
+      "vm_name": "ubuntu",
+
+      "atlas_username": "{{env `ATLAS_USERNAME`}}",
+      "atlas_name": "{{env `ATLAS_NAME`}}",
+      "version": "0.0.0",
+
+      "iso_url": "http://archive.ubuntu.com/ubuntu/dists/trusty-updates/main/installer-amd64/current/images/netboot/mini.iso",
+      "iso_checksum": "1b91cef828abc29dd1797f0c069a6fb59f4fa48b5c7ab00d3807392bd9c11126",
       "iso_checksum_type": "sha256",
       "boot_command": "<esc><wait> /linux initrd=/initrd.gz auto=true noapic=true fb=false hostname=localhost locale=en_US keyboard-configuration/modelcode=SKIP",
       "boot_wait": "5s",
@@ -85,11 +90,47 @@
       "script": "scripts/cleanup.sh"
     }
   ],
-  "post-processors": [
-    {
-      "type": "vagrant",
-      "output": "{{user `vm_name`}}-{{ .Provider }}.box",
-      "compression_level": 0
-    }
-  ]
+    "post-processors": [
+    [
+      {
+        "type": "vagrant",
+        "vagrantfile_template": "vagrantfile.template",
+        "keep_input_artifact": false
+      },
+      {
+        "type": "atlas",
+        "only": ["vmware-iso"],
+        "artifact": "{{user `atlas_username`}}/{{user `atlas_name`}}",
+        "artifact_type": "vagrant.box",
+        "metadata": {
+          "provider": "vmware_desktop",
+          "version": "{{user `version`}}"
+        }
+      },
+      {
+        "type": "atlas",
+        "only": ["qemu"],
+        "artifact": "{{user `atlas_username`}}/{{user `atlas_name`}}",
+        "artifact_type": "vagrant.box",
+        "metadata": {
+          "provider": "libvirt",
+          "version": "{{user `version`}}"
+        }
+      },
+      {
+        "type": "atlas",
+        "only": ["virtualbox-iso"],
+        "artifact": "{{user `atlas_username`}}/{{user `atlas_name`}}",
+        "artifact_type": "vagrant.box",
+        "metadata": {
+          "provider": "virtualbox",
+          "version": "{{user `version`}}"
+        }
+      }
+    ]
+  ],
+  "push": {
+    "name": "{{user `atlas_username`}}/{{user `atlas_name`}}",
+    "vcs": true
+  }
 }
