@@ -5,6 +5,8 @@
 
 packer template to build Ubuntu Server images
 
+vagrant images are available at [uchida/ubuntu](https://atlas.hashicorp.com/uchida/boxes/ubuntu).
+
 ## Building Images
 
 To build images, simply run:
