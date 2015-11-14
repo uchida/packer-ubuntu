@@ -6,7 +6,7 @@
       "atlas_name": "{{env `ATLAS_NAME`}}",
       "version": "0.0.0",
 
-      "iso_url": "http://archive.ubuntu.com/ubuntu/dists/trusty-updates/main/installer-amd64/current/images/netboot/mini.iso",
+      "iso_url": "http://us.archive.ubuntu.com/ubuntu/dists/trusty-updates/main/installer-amd64/current/images/netboot/mini.iso",
       "iso_checksum": "1b91cef828abc29dd1797f0c069a6fb59f4fa48b5c7ab00d3807392bd9c11126",
       "iso_checksum_type": "sha256",
       "boot_command": "<esc><wait> /linux initrd=/initrd.gz auto=true noapic=true fb=false hostname=localhost locale=en_US keyboard-configuration/modelcode=SKIP",
