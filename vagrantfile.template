@@ -3,9 +3,4 @@
 
 Vagrant.configure(2) do |config|
   config.vm.box = "uchida/ubuntu"
-  config.vm.provider "virtualbox" do |vb|
-    #vb.cpus = 1
-    #vb.memory = 2048
-    #vb.gui = true
-  end
 end
