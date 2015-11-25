@@ -1,7 +1,7 @@
 # packer-ubuntu
 
 [![CircleCI](https://img.shields.io/circleci/project/uchida/packer-ubuntu.svg)](https://circleci.com/gh/uchida/packer-ubuntu)
-[![License](https://img.shields.io/github/license/uchida/packer-ubuntu.svg)](http://creativecommons.org/publicdomain/zero/1.0/deed)
+[![License](https://img.shields.io/github/license/uchida/packer-ubuntu.svg)](https://tldrlegal.com/license/creative-commons-cc0-1.0-universal)
 
 packer template to build Ubuntu Server images
 
