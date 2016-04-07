@@ -1,6 +1,6 @@
 #!/bin/bash
 set -ex
-useradd vagrant -u 501 -g sudo
+useradd vagrant -u 501 -g sudo -s /bin/bash
 echo vagrant:vagrant | chpasswd
 cat <<EOF > /etc/sudoers.d/vagrant
 vagrant ALL=(ALL) NOPASSWD: ALL
