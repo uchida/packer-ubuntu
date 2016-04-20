@@ -4,10 +4,10 @@
     "atlas_name": "ubuntu",
     "version": "0.0.0",
 
-    "iso_url": "http://us.archive.ubuntu.com/ubuntu/dists/trusty-updates/main/installer-amd64/current/images/netboot/mini.iso",
-    "iso_checksum": "b7c2a194bb7e639ac62fee110b6d54517e742aed7afb049128734b0d7ed75521",
+    "iso_url": "http://us.archive.ubuntu.com/ubuntu/dists/xenial/main/installer-amd64/current/images/netboot/mini.iso",
+    "iso_checksum": "655d1ec0a7415b4d963e7f2c40e3d56bd135907dda2cedd0c75209ced3a63103",
     "iso_checksum_type": "sha256",
-    "boot_command": "<esc><wait> /linux initrd=/initrd.gz auto=true noapic=true fb=false hostname=localhost locale=en_US keyboard-configuration/modelcode=SKIP",
+    "boot_command": "<tab><wait><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>/linux initrd=/initrd.gz auto=true noapic=true fb=false hostname=localhost locale=en_US keyboard-configuration/modelcode=SKIP",
     "boot_wait": "60s",
     "disk_size": "8192",
     "http_directory": "http",
