@@ -1,10 +1,10 @@
 machine:
   environment:
     PATH: "${HOME}/bin:${HOME}/vagrant/bin:${PATH}"
-    PACKER_URL: "https://releases.hashicorp.com/packer/0.10.0/packer_0.10.0_linux_amd64.zip"
-    PACKER_SHA256SUM: "eadd33bc0f8fa42034059fc1cda5f43ed6f540746e767480f0706ebed49b45e5"
-    VAGRANT_URL: "https://releases.hashicorp.com/vagrant/1.8.1/vagrant_1.8.1_x86_64.deb"
-    VAGRANT_SHA256SUM: "ed0e1ae0f35aecd47e0b3dfb486a230984a08ceda3b371486add4d42714a693d"
+    PACKER_URL: "https://releases.hashicorp.com/packer/1.0.0/packer_1.0.0_linux_amd64.zip"
+    PACKER_SHA256SUM: "ed697ace39f8bb7bf6ccd78e21b2075f53c0f23cdfb5276c380a053a7b906853"
+    VAGRANT_URL: "https://releases.hashicorp.com/vagrant/1.9.3/vagrant_1.9.3_x86_64.deb"
+    VAGRANT_SHA256SUM: "faff6befacc7eed3978b4b71f0dbb9c135c01d8a4d13236bda2f9ed53482d2c4"
 
 dependencies:
   cache_directories:
