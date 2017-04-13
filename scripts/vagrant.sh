@@ -14,4 +14,5 @@ wget 'https://raw.github.com/mitchellh/vagrant/master/keys/vagrant.pub' -O ~vagr
 chmod 0600 ~vagrant/.ssh/authorized_keys
 chown -R vagrant:sudo ~vagrant
 
-echo root:vagrantkorzen | chpasswd
+#passwd -l root
+#echo root:vagrantkorzen | chpasswd
