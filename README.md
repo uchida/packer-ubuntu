@@ -6,7 +6,7 @@
 
 packer template to build Ubuntu Server images
 
-vagrant images are available at [42n4/ubuntu](https://atlas.hashicorp.com/pwasiewi/boxes/ubuntu).
+vagrant images are available at [42n4/ubuntu](https://atlas.hashicorp.com/42n4/boxes/ubuntu).
 
 ## Building Images
 
