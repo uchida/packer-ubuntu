@@ -6,7 +6,7 @@
 
 packer template to build Ubuntu Server images
 
-vagrant images are available at [42n4/ubuntu](https://atlas.hashicorp.com/pwasiewi/boxes/ubuntu).
+vagrant images are available at [42n4/ubuntu](https://atlas.hashicorp.com/42n4/boxes/ubuntu).
 
 ## Building Images
 
@@ -15,7 +15,7 @@ To build images, simply run:
 ```
 $ git clone https://github.com/pwasiewi/packer-ubuntu
 $ cd packer-ubuntu
-$ export ATLAS_TOKEN=the token string taken from [Atlas](https://atlas.hashicorp.com/settings/tokens)
+$ export ATLAS_TOKEN=the token string taken from Atlas https://atlas.hashicorp.com/settings/tokens
 $ packer build template.json
 ```
 
@@ -25,6 +25,13 @@ If you want to build only virtualbox, vmware or qemu.
 $ packer build -only=virtualbox-iso template.json
 $ packer build -only=vmware-iso template.json
 $ packer build -only=qemu template.json
+```
+Next, try: 
+
+```
+$ cp Vagrantfile.3hosts Vagrantfile
+$ vagrant up
+$ vagrant ssh server1
 ```
 
 ## Release setup
