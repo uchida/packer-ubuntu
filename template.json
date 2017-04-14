@@ -2,7 +2,7 @@
   "variables": {
     "atlas_username": "42n4",
     "atlas_name": "ubuntu",
-    "version": "0.8",
+    "version": "1.0",
     "iso_url": "http://us.archive.ubuntu.com/ubuntu/dists/yakkety/main/installer-amd64/current/images/netboot/mini.iso",
     "iso_checksum": "f8589513e78bcc502cbdee10563e5a8b0baf7e29ba9c6b935fdff6526bd6300d",
     "iso_checksum_type": "sha256",
