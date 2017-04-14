@@ -26,6 +26,13 @@ $ packer build -only=virtualbox-iso template.json
 $ packer build -only=vmware-iso template.json
 $ packer build -only=qemu template.json
 ```
+Next, try: 
+
+```
+$ cp Vagrantfile.3hosts Vagrantfile
+$ vagrant up
+$ vagrant ssh server1
+```
 
 ## Release setup
 
