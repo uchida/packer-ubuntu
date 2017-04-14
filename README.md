@@ -15,7 +15,7 @@ To build images, simply run:
 ```
 $ git clone https://github.com/pwasiewi/packer-ubuntu
 $ cd packer-ubuntu
-$ export ATLAS_TOKEN=the token string taken from [Atlas](https://atlas.hashicorp.com/settings/tokens)
+$ export ATLAS_TOKEN=the token string taken from Atlas https://atlas.hashicorp.com/settings/tokens
 $ packer build template.json
 ```
 
