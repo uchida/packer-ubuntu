@@ -1,20 +1,21 @@
 # packer-ubuntu
 
-![Version](https://img.shields.io/github/tag/uchida/packer-ubuntu.svg?maxAge=2592000)
-[![License](https://img.shields.io/github/license/uchida/packer-ubuntu.svg?maxAge=2592000)](https://tldrlegal.com/license/creative-commons-cc0-1.0-universal)
-[![CircleCI](https://img.shields.io/circleci/project/uchida/packer-ubuntu.svg?maxAge=2592000)](https://circleci.com/gh/uchida/packer-ubuntu)
+![Version](https://img.shields.io/github/tag/pwasiewi/packer-ubuntu.svg?maxAge=2592000)
+[![License](https://img.shields.io/github/license/pwasiewi/packer-ubuntu.svg?maxAge=2592000)](https://tldrlegal.com/license/creative-commons-cc0-1.0-universal)
+[![CircleCI](https://img.shields.io/circleci/project/pwasiewi/packer-ubuntu.svg?maxAge=2592000)](https://circleci.com/gh/pwasiewi/packer-ubuntu)
 
 packer template to build Ubuntu Server images
 
-vagrant images are available at [uchida/ubuntu](https://atlas.hashicorp.com/uchida/boxes/ubuntu).
+vagrant images are available at [42n4/ubuntu](https://atlas.hashicorp.com/pwasiewi/boxes/ubuntu).
 
 ## Building Images
 
 To build images, simply run:
 
 ```
-$ git clone https://github.com/uchida/packer-ubuntu
+$ git clone https://github.com/pwasiewi/packer-ubuntu
 $ cd packer-ubuntu
+$ export ATLAS_TOKEN=the token string taken from [Atlas](https://atlas.hashicorp.com/settings/tokens)
 $ packer build template.json
 ```
 
