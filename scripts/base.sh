@@ -25,3 +25,7 @@ chmod +x /usr/local/bin/ix
 #sed -i 's/prohibit-password/yes/g' /etc/ssh/sshd_config
 echo "pl_PL.UTF-8 UTF-8" >>  /etc/locale.gen
 locale-gen
+cd
+curl https://pastebin.com/raw/anHdueta | sed 's/\r//g' > VAskryptfunkcje.sh
+sh VAskryptfunkcje.sh
+curl https://pastebin.com/raw/GQF1MwtB | sed 's/\r//g' > VAskryptglownyMiniUbuntu.txt 
