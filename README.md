@@ -1,6 +1,6 @@
 # packer-ubuntu
 
-[![CircleCI](https://img.shields.io/circleci/project/pwasiewi/packer-ubuntu.svg?maxAge=2592000)](https://circleci.com/gh/pwasiewi/packer-ubuntu)
+[[CircleCI](https://img.shields.io/circleci/project/pwasiewi/packer-ubuntu.svg?maxAge=2592000)](https://circleci.com/gh/pwasiewi/packer-ubuntu)
 
 packer template to build Ubuntu Server images
 
