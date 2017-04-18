@@ -1,21 +1,21 @@
 {
   "variables": {
-    "atlas_username": "uchida",
+    "atlas_username": "42n4",
     "atlas_name": "ubuntu",
-    "version": "0.0.0",
-
-    "iso_url": "http://us.archive.ubuntu.com/ubuntu/dists/xenial/main/installer-amd64/current/images/netboot/mini.iso",
-    "iso_checksum": "655d1ec0a7415b4d963e7f2c40e3d56bd135907dda2cedd0c75209ced3a63103",
+    "version": "1.6",
+    "iso_url": "http://us.archive.ubuntu.com/ubuntu/dists/yakkety/main/installer-amd64/current/images/netboot/mini.iso",
+    "iso_checksum": "f8589513e78bcc502cbdee10563e5a8b0baf7e29ba9c6b935fdff6526bd6300d",
     "iso_checksum_type": "sha256",
     "boot_command": "<tab><wait><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>/linux initrd=/initrd.gz auto=true noapic=true fb=false hostname=localhost locale=en_US keyboard-configuration/modelcode=SKIP",
-    "boot_wait": "60s",
+    "boot_wait": "20s",
     "disk_size": "8192",
     "http_directory": "http",
     "ssh_username": "root",
     "ssh_password": "packer",
     "ssh_wait_timeout": "3600s",
     "shutdown_command": "shutdown -P now",
-    "headless": "true"
+    "headless": "true",
+    "vm_dir": "/mnt/dc/VBox"
   },
   "builders": [
     {
@@ -34,7 +34,15 @@
       "ssh_password": "{{user `ssh_password`}}",
       "ssh_wait_timeout": "{{user `ssh_wait_timeout`}}",
       "shutdown_command": "{{user `shutdown_command`}}",
-      "headless": "{{user `headless`}}"
+      "headless": "{{user `headless`}}",
+      "vboxmanage": [
+	[ "modifyvm", "{{.Name}}", "--memory", "2560" ],
+      	[ "modifyvm", "{{.Name}}", "--cpus", "2" ],
+        [ "modifyvm", "{{.Name}}", "--vram", "128"],
+    	[ "createhd", "--format", "VMDK", "--filename", "{{user `vm_dir`}}/{{user `atlas_name`}}/{{user `atlas_name`}}_2.vmdk", "--variant", "STREAM", "--size", "8192" ],
+	[ "storagectl", "{{.Name}}", "--name", "SATA Controller", "--add", "sata", "--controller", "IntelAHCI"],
+    	[ "storageattach", "{{.Name}}", "--storagectl", "SATA Controller", "--port", "1", "--type", "hdd", "--medium", "{{user `vm_dir`}}/{{user `atlas_name`}}/{{user `atlas_name`}}_2.vmdk" ]
+      ]
     },
     {
       "type": "vmware-iso",

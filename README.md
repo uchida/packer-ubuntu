@@ -1,29 +1,63 @@
 # packer-ubuntu
 
-![Version](https://img.shields.io/github/tag/uchida/packer-ubuntu.svg?maxAge=2592000)
-[![License](https://img.shields.io/github/license/uchida/packer-ubuntu.svg?maxAge=2592000)](https://tldrlegal.com/license/creative-commons-cc0-1.0-universal)
-[![CircleCI](https://img.shields.io/circleci/project/uchida/packer-ubuntu.svg?maxAge=2592000)](https://circleci.com/gh/uchida/packer-ubuntu)
+[![CircleCI](https://img.shields.io/circleci/project/pwasiewi/packer-ubuntu.svg?maxAge=2592000)](https://circleci.com/gh/pwasiewi/packer-ubuntu)
 
 packer template to build Ubuntu Server images
 
-vagrant images are available at [uchida/ubuntu](https://atlas.hashicorp.com/uchida/boxes/ubuntu).
+vagrant images are available at [42n4/ubuntu](https://atlas.hashicorp.com/42n4/boxes/ubuntu).
 
 ## Building Images
 
 To build images, simply run:
 
 ```
-$ git clone https://github.com/uchida/packer-ubuntu
-$ cd packer-ubuntu
-$ packer build template.json
+git clone https://github.com/pwasiewi/packer-ubuntu
+cd packer-ubuntu
+export ATLAS_TOKEN=the token string taken from Atlas https://atlas.hashicorp.com/settings/tokens
+packer build template.json
 ```
 
-If you want to build only virtualbox, vmware or qemu.
+If you want to build only virtualbox, vmware or qemu, but now only virtualbox one works with ceph.
 
 ```
-$ packer build -only=virtualbox-iso template.json
-$ packer build -only=vmware-iso template.json
-$ packer build -only=qemu template.json
+packer build -only=virtualbox-iso template.json
+packer build -only=vmware-iso template.json
+packer build -only=qemu template.json
+```
+
+Next, try to execute it in a new directory:  
+
+```
+#vagrant destroy -f #remove ALL previous instances
+vagrant box update  #update this box in order to make 3 hosts
+wget https://raw.githubusercontent.com/pwasiewi/packer-ubuntu/master/Vagrantfile.3hosts -O Vagrantfile
+sed -i 's/192.168.0/192.168.<your local net number>/g' Vagrantfile
+sed -i 's/enp0s31f6/eth0/g' Vagrantfile # you change the host bridge name if it is not 'enp0s31f6'
+#in MSWin it gives you names: VBoxManage.exe list bridgedifs
+#:bridge => "Intel(R) Ethernet Connection (2) I219-V",
+vagrant up
+vagrant ssh server1
+#in windows: https://www.sitepoint.com/getting-started-vagrant-windows/
+#you use putty after converting with puttygen a vagrant openssh key to a putty key
+```
+
+Login to the server1 root account 
+
+```
+sudo su -
+```
+
+and execute:
+
+```
+va_hosts4ssh server
+va_ceph_init
+va_ceph_create
+[ ! -d /mnt/mycephfs ] && mkdir /mnt/mycephfs
+mount -t ceph `ifconfig enp0s8 | grep inet\ | awk '{print $2}'`:6789:/ /mnt/mycephfs -o name=admin,secret=`cat /etc/ceph/ceph.client.admin.keyring | grep key | cut -f 2 | sed 's/key = //g'`
+#ceph disk tests, where -s file size in MB, -r RAM in MB (defaults: 8192 and all available memory)
+free && sync && echo 3 > /proc/sys/vm/drop_caches && free
+bonnie++ -s 2048 -r 1024 -u root -d /mnt/mycephfs -m BenchClient
 ```
 
 ## Release setup
@@ -56,8 +90,7 @@ setup instructions are the following:
 
 ## License
 
-[![CC0](http://i.creativecommons.org/p/zero/1.0/88x31.png "CC0")]
-(http://creativecommons.org/publicdomain/zero/1.0/deed)
+[![CC0](http://i.creativecommons.org/p/zero/1.0/88x31.png "CC0")](http://creativecommons.org/publicdomain/zero/1.0/deed)
 
 dedicated to public domain, no rights reserved.
 

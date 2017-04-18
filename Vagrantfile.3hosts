@@ -1,0 +1,64 @@
+servers=[
+  {
+    :hostname => "server1",
+    :ip => "192.168.0.11",
+    #in MSWin it gives you names: VBoxManage.exe list bridgedifs
+    #:bridge => "Intel(R) Ethernet Connection (2) I219-V",
+    :bridge => "enp0s31f6",
+    #:box => "42n4/UbuntuServerYakkety",
+    :box => "42n4/ubuntu",
+    :ram => 2048,
+    :cpu => 2,
+    :mac => "02002751a1bc"
+  },
+  {
+    :hostname => "server2",
+    :ip => "192.168.0.12",
+    #in MSWin it gives you names: VBoxManage.exe list bridgedifs
+    #:bridge => "Intel(R) Ethernet Connection (2) I219-V",
+    :bridge => "enp0s31f6",
+    #:box => "42n4/UbuntuServerYakkety",
+    :box => "42n4/ubuntu",
+    :ram => 2048,
+    :cpu => 2,
+    :mac => "0200272864d1"
+  },
+  {
+    :hostname => "server3",
+    :ip => "192.168.0.13",
+    #in MSWin it gives you names: VBoxManage.exe list bridgedifs
+    #:bridge => "Intel(R) Ethernet Connection (2) I219-V",
+    :bridge => "enp0s31f6",
+    #:box => "42n4/UbuntuServerYakkety",
+    :box => "42n4/ubuntu",
+    :ram => 2048,
+    :cpu => 2,
+    :mac => "020027092383"
+  }
+]
+Vagrant.configure(2) do |config|
+    servers.each do |machine|
+        config.vm.define machine[:hostname] do |node|
+            node.vm.box = machine[:box]
+            node.vm.hostname = machine[:hostname]
+            node.vm.network "public_network", bridge: machine[:bridge] ,ip: machine[:ip], mac: machine[:mac]
+            node.vm.provider "virtualbox" do |vb|
+                vb.customize ["modifyvm", :id, "--memory", machine[:ram]]
+                vb.customize ["modifyvm", :id, "--nic2", "bridged",  "--nictype2", "82540EM", "--bridgeadapter2", machine[:bridge], "--cableconnected2", "on" ]
+		#VBoxManage createhd --filename hd_2.vdi --size 8192
+		#VBoxManage storageattach $VM --storagectl SATA --port 2 --device 0 --type hdd --medium ${VMFOLDER}/${VM}_2.vdi --discard on --nonrotational on
+            end
+        end
+    end
+  # default router
+  config.vm.provision "shell",
+    run: "always",
+    inline: "route add default gw 192.168.0.1"
+  # delete default gw on enp0s3 (eth0)
+  config.vm.provision "shell",
+    run: "always",
+    inline: "eval `route -n | awk '{ if ($8 ==\"enp0s3\" && $2 != \"0.0.0.0\") print \"route del default gw \" $2; }'`"
+  config.vm.provision "shell",
+    run: "always",
+    inline: "sed -i 's/192.168.2/192.168.0/g' /usr/local/bin/va_hosts4ssh"
+end
